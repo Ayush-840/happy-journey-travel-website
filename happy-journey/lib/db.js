@@ -206,6 +206,44 @@ function seedData() {
     rating: 4.6, budget_per_day: '₹200 for entry'
   });
 
+  // ---------- ANDHRA PRADESH ----------
+  const vizag = insertCity.run({ state_id: stateIds['andhra-pradesh'], name: 'Visakhapatnam', slug: 'visakhapatnam', description: 'The Jewel of the East Coast — a beautiful port city known for its pristine beaches and naval heritage.', hero_image: 'https://images.unsplash.com/photo-1590133322241-115f5c88926d?w=1200', lat: 17.6868, lng: 83.2185 });
+  const tirupati = insertCity.run({ state_id: stateIds['andhra-pradesh'], name: 'Tirupati', slug: 'tirupati', description: 'The Spiritual Capital of Andhra Pradesh — home to the world-famous Lord Venkateswara Temple.', hero_image: 'https://images.unsplash.com/photo-1620311316492-d96f9a72138a?w=1200', lat: 13.6288, lng: 79.4192 });
+  const araku = insertCity.run({ state_id: stateIds['andhra-pradesh'], name: 'Araku Valley', slug: 'araku-valley', description: 'A scenic hill station in the Eastern Ghats, famous for its coffee plantations and tribal culture.', hero_image: 'https://images.unsplash.com/photo-1618179267204-6295551c68e1?w=1200', lat: 18.3333, lng: 82.8667 });
+
+  insertPlace.run({ 
+    city_id: vizag.lastInsertRowid, name: 'RK Beach', slug: 'rk-beach', 
+    description: 'Ramakrishna Mission Beach — a popular coastal stretch with museums, parks, and naval memorials.', 
+    highlights: JSON.stringify(['INS Kursura Submarine Museum', 'War Memorial', 'Sunset walks']), 
+    hero_image: 'https://images.unsplash.com/photo-1590133322241-115f5c88926d?w=1200', 
+    gallery: JSON.stringify(['https://images.unsplash.com/photo-1590133322241-115f5c88926d?w=800']), 
+    lat: 17.7142, lng: 83.3235, best_time: 'October to March', 
+    tags: JSON.stringify(['Beach', 'Museum', 'Family']),
+    rating: 4.6, budget_per_day: '₹300'
+  });
+
+  insertPlace.run({ 
+    city_id: tirupati.lastInsertRowid, name: 'Tirumala Venkateswara Temple', slug: 'tirumala-temple', 
+    description: 'One of the most visited and richest temples in the world, located on the Tirumala Hills.', 
+    highlights: JSON.stringify(['Spiritual energy', 'Seven Hills view', 'Laddu Prasadam']), 
+    hero_image: 'https://images.unsplash.com/photo-1620311316492-d96f9a72138a?w=1200', 
+    gallery: JSON.stringify(['https://images.unsplash.com/photo-1620311316492-d96f9a72138a?w=800']), 
+    lat: 13.6833, lng: 79.3500, best_time: 'September to February', 
+    tags: JSON.stringify(['Spiritual', 'Temple', 'Heritage']),
+    rating: 5.0, budget_per_day: '₹1000'
+  });
+
+  insertPlace.run({ 
+    city_id: araku.lastInsertRowid, name: 'Borra Caves', slug: 'borra-caves', 
+    description: 'Million-year-old limestone caves featuring stunning stalactite and stalagmite formations.', 
+    highlights: JSON.stringify(['Natural rock formations', 'Speleothem lighting', 'Tribal area nearby']), 
+    hero_image: 'https://images.unsplash.com/photo-1618179267204-6295551c68e1?w=1200', 
+    gallery: JSON.stringify(['https://images.unsplash.com/photo-1618179267204-6295551c68e1?w=800']), 
+    lat: 18.2800, lng: 83.0300, best_time: 'Winter months', 
+    tags: JSON.stringify(['Nature', 'Caves', 'Adventure']),
+    rating: 4.8, budget_per_day: '₹400'
+  });
+
   // ---------- ANDAMAN & NICOBAR ----------
   const havelock = insertCity.run({ state_id: stateIds['andaman-and-nicobar'], name: 'Havelock Island', slug: 'havelock-island', description: 'Andaman\'s most famous island and a premier beach tourism hub with luxury resorts and pristine shores.', hero_image: 'https://images.unsplash.com/photo-1589135410974-dc4423718622?w=1200', lat: 12.0163, lng: 92.9975 });
   const portBlair = insertCity.run({ state_id: stateIds['andaman-and-nicobar'], name: 'Port Blair', slug: 'port-blair', description: 'The gateway to Andaman islands with rich colonial history and iconic landmarks.', hero_image: 'https://images.unsplash.com/photo-1518384401463-d3876163c195?w=1200', lat: 11.6234, lng: 92.7265 });
@@ -442,6 +480,7 @@ function seedData() {
   const cityPalaceUdaipur = insertPlace.run({ city_id: udaipur.lastInsertRowid, name: 'City Palace Udaipur', slug: 'city-palace-udaipur', description: 'The largest palace complex in Rajasthan, rising grandly from the shores of Lake Pichola with stunning lake and mountain views.', highlights: JSON.stringify(['Lake Pichola views', 'Balconies and turrets', 'Crystal Gallery', 'Vintage car museum']), hero_image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200', gallery: JSON.stringify(['https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800']), lat: 24.5789, lng: 73.6831, best_time: 'September to March', tags: JSON.stringify(['Palace', 'Lake', 'Heritage']), rating: 4.8, budget_per_day: '₹800 for entry' });
   insertPlace.run({ city_id: udaipur.lastInsertRowid, name: 'Lake Pichola', slug: 'lake-pichola', description: 'An enchanting artificial lake with island palaces, boat rides, and serene sunset vistas.', highlights: JSON.stringify(['Jag Mandir island palace', 'Evening boat cruise', 'Sunset over the Aravalli hills', 'Floating restaurant']), hero_image: 'https://images.unsplash.com/photo-1512100356956-c1227c3464d1?w=1200', gallery: JSON.stringify(['https://images.unsplash.com/photo-1512100356956-c1227c3464d1?w=800']), lat: 24.5770, lng: 73.6754, best_time: 'October to March', tags: JSON.stringify(['Lake', 'Boat Ride', 'Sunset']), rating: 4.9, budget_per_day: '₹500 for boat ride' });
 
+
   // nearby for amber fort
   insertNearby.run({ place_id: amberFort.lastInsertRowid, name: 'Jaigarh Fort', type: 'Fort', distance_km: 1.4, description: 'Hilltop fort with the world\'s largest cannon on wheels.' });
   insertNearby.run({ place_id: amberFort.lastInsertRowid, name: 'Nahargarh Fort', type: 'Fort', distance_km: 6.2, description: 'Scenic fort with panoramic views of Jaipur city.' });
@@ -464,6 +503,12 @@ function seedData() {
   insertStay.run({ city_id: jodhpur.lastInsertRowid, name: 'Raas Jodhpur', stars: 5, price_per_night: 15000, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Pool', 'Spa', 'Restaurant', 'WiFi', 'Fort Views']), address: 'Tunwarji ka Jhalra, Jodhpur' });
   insertStay.run({ city_id: jodhpur.lastInsertRowid, name: 'Blue House Hostel', stars: 2, price_per_night: 500, photo: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600', amenities: JSON.stringify(['WiFi', 'Terrace', 'Common Area']), address: 'Old City, Jodhpur' });
 
+  // stays & transport for Udaipur
+  insertTransport.run({ city_id: udaipur.lastInsertRowid, type: 'Cab', provider: 'HJ Cabs', price_min: 250, price_max: 900, icon: '🚕' });
+  insertTransport.run({ city_id: udaipur.lastInsertRowid, type: 'Boat/Ferry', provider: 'Lake Cruises', price_min: 400, price_max: 1200, icon: '⛴️' });
+  insertStay.run({ city_id: udaipur.lastInsertRowid, name: 'The Leela Palace Udaipur', stars: 5, price_per_night: 35000, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Pool', 'Lake View', 'Spa', 'Fine Dining']), address: 'Lake Pichola, Udaipur' });
+  insertStay.run({ city_id: udaipur.lastInsertRowid, name: 'Lake Pichola Hotel', stars: 4, price_per_night: 6000, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['WiFi', 'Restaurant', 'Lake View']), address: 'Udaipur' });
+
   // ---------- GOA ----------
   const panaji = insertCity.run({ state_id: stateIds['goa'], name: 'Panaji', slug: 'panaji', description: 'Goa\'s charming capital — a Portuguese-influenced town with colorful houses, a lively riverfront, and excellent food.', hero_image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=1200', lat: 15.4989, lng: 73.8278 });
   const calangute = insertCity.run({ state_id: stateIds['goa'], name: 'Calangute', slug: 'calangute', description: 'The Queen of Beaches — North Goa\'s most popular stretch with water sports, shacks, and golden sands.', hero_image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1200', lat: 15.5440, lng: 73.7552 });
@@ -480,6 +525,12 @@ function seedData() {
 
   insertStay.run({ city_id: calangute.lastInsertRowid, name: 'Taj Holiday Village Resort', stars: 5, price_per_night: 18000, photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600', amenities: JSON.stringify(['Beach Access', 'Pool', 'Spa', 'Restaurant', 'WiFi']), address: 'Sinquerim, Calangute, Goa' });
   insertStay.run({ city_id: calangute.lastInsertRowid, name: 'Backpacker Panda Goa', stars: 2, price_per_night: 700, photo: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600', amenities: JSON.stringify(['WiFi', 'Common Kitchen', 'Beach Nearby', 'Events']), address: 'Baga Road, Goa' });
+
+  // Panaji (Goa)
+  insertTransport.run({ city_id: panaji.lastInsertRowid, type: 'Cab', provider: 'HJ Cabs', price_min: 200, price_max: 800, icon: '🚕' });
+  insertTransport.run({ city_id: panaji.lastInsertRowid, type: 'Scooter Rental', provider: 'HJ Rides', price_min: 350, price_max: 600, icon: '🛵' });
+  insertStay.run({ city_id: panaji.lastInsertRowid, name: 'Vivanta Goa, Panaji', stars: 5, price_per_night: 9000, photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600', amenities: JSON.stringify(['Pool', 'WiFi', 'Gym', 'Restaurant']), address: 'Panaji' });
+  insertStay.run({ city_id: panaji.lastInsertRowid, name: 'Old Quarter Hostel', stars: 2, price_per_night: 800, photo: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600', amenities: JSON.stringify(['WiFi', 'Social', 'Cafe']), address: 'Fontainhas, Panaji' });
 
   // ---------- KERALA ----------
   const kochi = insertCity.run({ state_id: stateIds['kerala'], name: 'Kochi', slug: 'kochi', description: 'The Queen of the Arabian Sea — a port city where Dutch, Portuguese, Chinese, and Indian cultures beautifully collide.', hero_image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1200', lat: 9.9312, lng: 76.2673 });
@@ -534,4 +585,48 @@ function seedData() {
 
   insertStay.run({ city_id: agra.lastInsertRowid, name: 'Oberoi Amarvilas', stars: 5, price_per_night: 45000, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Taj Views from every room', 'Pool', 'Spa', 'Restaurant', 'WiFi']), address: 'Taj East Gate Road, Agra' });
   insertStay.run({ city_id: agra.lastInsertRowid, name: 'Hotel Taj Resorts', stars: 3, price_per_night: 2500, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['Restaurant', 'WiFi', 'Parking', 'Tour Desk']), address: 'Fatehabad Road, Agra' });
+
+  // ANDAMAN TRANSPORT & STAYS
+  [havelock, portBlair, neilIsland, baratang].forEach(city => {
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Cab', provider: 'Island Cabs', price_min: 500, price_max: 1500, icon: '🚕' });
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Scooter Rental', provider: 'Island Rides', price_min: 400, price_max: 800, icon: '🛵' });
+    if (city === portBlair) {
+       insertTransport.run({ city_id: city.lastInsertRowid, type: 'Ferry', provider: 'Green Ocean', price_min: 1000, price_max: 2500, icon: '⛴️' });
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Fortune Resort Bay Island', stars: 4, price_per_night: 9000, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Pool', 'Sea View', 'WiFi']), address: 'Port Blair' });
+    } else if (city === havelock) {
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Taj Exotica Resort & Spa', stars: 5, price_per_night: 45000, photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600', amenities: JSON.stringify(['Private Beach', 'Pool', 'Fine Dining']), address: 'Radhanagar Beach, Havelock' });
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Barefoot at Havelock', stars: 4, price_per_night: 15000, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['Eco-friendly', 'Beach Access', 'WiFi']), address: 'Havelock' });
+    } else {
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Seashell Neil', stars: 4, price_per_night: 8000, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['WiFi', 'Pool', 'Bar']), address: city.name });
+    }
+  });
+
+  // ARUNACHAL TRANSPORT & STAYS
+  [tawang, ziro, bomdila, mechuka].forEach(city => {
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Sumo/SUV', provider: 'Himalayan Travel', price_min: 2000, price_max: 5000, icon: '🚙' });
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Shared Cab', provider: 'Local Shared', price_min: 500, price_max: 1000, icon: '🚐' });
+    insertStay.run({ city_id: city.lastInsertRowid, name: 'Gakyi Khang Zhang', stars: 3, price_per_night: 4500, photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600', amenities: JSON.stringify(['WiFi', 'Restaurant', 'Mountain View']), address: city.name });
+  });
+
+  // SHIMLA (Himachal)
+  insertTransport.run({ city_id: shimla.lastInsertRowid, type: 'Cab', provider: 'Shimla Cabs', price_min: 300, price_max: 1200, icon: '🚕' });
+  insertStay.run({ city_id: shimla.lastInsertRowid, name: 'The Oberoi Cecil', stars: 5, price_per_night: 18000, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Pool', 'WiFi', 'Heritage', 'Luxury']), address: 'Shimla' });
+
+  // VARANASI (UP)
+  insertTransport.run({ city_id: varanasi.lastInsertRowid, type: 'Electric Rickshaw', provider: 'Local E-Auto', price_min: 30, price_max: 100, icon: '🛺' });
+  insertTransport.run({ city_id: varanasi.lastInsertRowid, type: 'Boat Rental', provider: 'Ghat Boats', price_min: 200, price_max: 800, icon: '🛶' });
+  insertStay.run({ city_id: varanasi.lastInsertRowid, name: 'Brijrama Palace', stars: 5, price_per_night: 22000, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['Ghat View', 'River Access', 'WiFi', 'Fine Dining']), address: 'Varanasi' });
+
+  // ANDHRA PRADESH TRANSPORT & STAYS
+  [vizag, tirupati, araku].forEach(city => {
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Cab', provider: 'Andhra Travels', price_min: 300, price_max: 1200, icon: '🚕' });
+    insertTransport.run({ city_id: city.lastInsertRowid, type: 'Local Bus', provider: 'APSRTC', price_min: 50, price_max: 200, icon: '🚌' });
+    if (city === araku) {
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Haritha Valley Resort', stars: 3, price_per_night: 3500, photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600', amenities: JSON.stringify(['Nature View', 'WiFi', 'Parking']), address: 'Araku Valley' });
+    } else if (city === tirupati) {
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'Marasa Sarovar Premiere', stars: 5, price_per_night: 7500, photo: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600', amenities: JSON.stringify(['Pool', 'WiFi', 'Gym', 'Temple View']), address: 'Tirupati' });
+    } else {
+       insertStay.run({ city_id: city.lastInsertRowid, name: 'The Gateway Hotel (Taj)', stars: 5, price_per_night: 9500, photo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600', amenities: JSON.stringify(['Sea View', 'WiFi', 'Pool']), address: 'Beach Road, Vizag' });
+    }
+  });
 }
