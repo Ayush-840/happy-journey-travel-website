@@ -28,7 +28,7 @@ export default function PlacePage() {
   }, [slug]);
 
   if (loading) return (
-    <div style={{ minHeight: "100vh", background: "var(--dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ minHeight: "100vh", background: "var(--dark)", display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}>
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: 56, marginBottom: 16, animation: "float 1.5s ease-in-out infinite" }}>📍</div>
         <div style={{ color: "#94a3b8" }}>Loading place details...</div>
@@ -53,7 +53,7 @@ export default function PlacePage() {
           filter: "brightness(0.45)",
           transition: "all 0.6s ease"
         }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(15,23,42,0.2) 60%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(212,175,55,0.1) 60%, transparent 100%)" }} />
 
         {/* Nav arrows */}
         {allImages.length > 1 && (
@@ -65,10 +65,10 @@ export default function PlacePage() {
           </>
         )}
 
-        <div style={{ position: "relative", zIndex: 5, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 40px 50px", maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ position: "relative", zIndex: 5, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 24px 40px", maxWidth: 1280, margin: "0 auto" }}>
           {/* Breadcrumb */}
           <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-            <Link href="/" style={{ color: "#64748b", textDecoration: "none", fontSize: 13 }}>Home</Link>
+            <Link href="/" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: 13 }}>Home</Link>
             <span style={{ color: "#475569" }}>›</span>
             <Link href={`/state/${place.state_slug}`} style={{ color: "#94a3b8", textDecoration: "none", fontSize: 13 }}>{place.state_name}</Link>
             <span style={{ color: "#475569" }}>›</span>
@@ -85,10 +85,10 @@ export default function PlacePage() {
           <p style={{ fontSize: "clamp(0.9rem, 1.8vw, 1.1rem)", color: "#cbd5e1", maxWidth: 620, lineHeight: 1.7 }}>{place.description}</p>
 
           <div style={{ marginTop: 20, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <span className="badge badge-blue">🗓️ Best: {place.best_time}</span>
+            <span className="badge badge-classy">🗓️ Best: {place.best_time}</span>
             <span className="badge badge-primary">📍 {place.city_name}, {place.state_name}</span>
-            <span className="badge badge-blue" style={{ background: "rgba(34,197,94,0.15)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }}>⭐ {place.rating} / 5.0</span>
-            <span className="badge badge-primary" style={{ background: "rgba(168,85,247,0.15)", color: "#c084fc", border: "1px solid rgba(168,85,247,0.2)" }}>💰 Budget: {place.budget_per_day}</span>
+            <span className="badge badge-primary" style={{ background: "rgba(34,197,94,0.15)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }}>⭐ {place.rating} / 5.0</span>
+            <span className="badge badge-primary" style={{ background: "rgba(212, 175, 55, 0.15)", color: "#fff8e1", border: "1px solid rgba(212, 175, 55, 0.25)" }}>💰 Budget: {place.budget_per_day}</span>
           </div>
 
           {/* Image dots */}
@@ -107,8 +107,8 @@ export default function PlacePage() {
       </div>
 
       {/* MAIN CONTENT */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "60px 24px 100px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: 40, alignItems: "start" }} className="place-grid">
+      <div className="container" style={{ padding: "60px 0 100px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: 32, alignItems: "start" }} className="place-grid">
 
           {/* LEFT */}
           <div>
@@ -143,7 +143,7 @@ export default function PlacePage() {
                   style={{ width: "100%", height: 360, border: "none", borderRadius: 12 }}
                 />
               </div>
-              <p style={{ fontSize: 12, color: "#475569", marginTop: 8 }}>📍 Coordinates: {place.lat}, {place.lng}</p>
+              <p style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>📍 Coordinates: {place.lat}, {place.lng}</p>
             </div>
 
             {/* Nearby Attractions */}
@@ -152,8 +152,8 @@ export default function PlacePage() {
                 <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 20, color: "white" }}>📌 Nearby Attractions</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {place.nearby_attractions.map(n => (
-                    <div key={n.id} style={{ padding: "16px 20px", background: "rgba(14,165,233,0.07)", borderRadius: 12, border: "1px solid rgba(14,165,233,0.15)", display: "flex", gap: 16, alignItems: "flex-start" }}>
-                      <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(14,165,233,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
+                    <div key={n.id} style={{ padding: "16px 20px", background: "rgba(212, 175, 55, 0.04)", borderRadius: 12, border: "1px solid rgba(212, 175, 55, 0.1)", display: "flex", gap: 16, alignItems: "flex-start" }}>
+                      <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(212, 175, 55, 0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
                         {n.type === "Beach" ? "🏖️" : n.type === "Fort" ? "🏰" : n.type === "Temple" ? "🛕" : n.type === "Activity" ? "🏄" : "📍"}
                       </div>
                       <div>
@@ -175,8 +175,8 @@ export default function PlacePage() {
               <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 {[["transport", "🚕 Transport"], ["stay", "🏨 Stays"], ["package", "📦 Package"]].map(([key, label]) => (
                   <button key={key} onClick={() => setActiveTab(key)} style={{
-                    flex: 1, padding: "14px 8px", background: activeTab === key ? "rgba(249,115,22,0.15)" : "none",
-                    border: "none", color: activeTab === key ? "var(--primary)" : "#64748b",
+                    flex: 1, padding: "14px 8px", background: activeTab === key ? "rgba(212, 175, 55, 0.15)" : "none",
+                    border: "none", color: activeTab === key ? "var(--primary)" : "var(--text-muted)",
                     fontWeight: activeTab === key ? 700 : 400, fontSize: 12, cursor: "pointer",
                     borderBottom: activeTab === key ? "2px solid var(--primary)" : "2px solid transparent",
                     transition: "all 0.2s"
@@ -230,7 +230,7 @@ export default function PlacePage() {
                                 <div style={{ fontWeight: 600, fontSize: 14, color: "white" }}>{s.name}</div>
                                 <div style={{ fontSize: 12, color: "var(--accent)" }}>{"⭐".repeat(s.stars)}</div>
                               </div>
-                              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)", marginBottom: 8 }}>₹{s.price_per_night?.toLocaleString()}<span style={{ fontWeight: 400, color: "#64748b", fontSize: 11 }}>/night</span></div>
+                               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)", marginBottom: 8 }}>₹{s.price_per_night?.toLocaleString()}<span style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: 11 }}>/night</span></div>
                               <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 10 }}>
                                 {s.amenities?.slice(0, 3).map(a => (
                                   <span key={a} style={{ fontSize: 10, padding: "2px 8px", background: "rgba(255,255,255,0.06)", borderRadius: 999, color: "#94a3b8" }}>{a}</span>
@@ -258,7 +258,7 @@ export default function PlacePage() {
                       </p>
                       {stays.length > 0 && transport.length > 0 ? (
                         <div style={{ padding: "16px", background: "rgba(249,115,22,0.08)", borderRadius: 12, border: "1px solid rgba(249,115,22,0.2)", marginBottom: 16 }}>
-                          <div style={{ fontSize: 13, color: "#cbd5e1", marginBottom: 4 }}>From ₹{(transport[0]?.price_min + stays[0]?.price_per_night).toLocaleString()}</div>
+                          <div style={{ fontSize: 13, color: "#cbd5e1", marginBottom: 4 }}>From ₹{(transport[0]?.price_min + (stays[0]?.price_per_night || 0)).toLocaleString()}</div>
                           <div style={{ fontSize: 11, color: "#64748b" }}>{transport[0]?.type} + {stays[0]?.name} (1 night)</div>
                         </div>
                       ) : null}
@@ -289,8 +289,9 @@ export default function PlacePage() {
       </footer>
 
       <style>{`
-        @media (max-width: 900px) {
-          .place-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 1024px) {
+          .place-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .place-grid > div:nth-child(2) { position: static !important; }
         }
       `}</style>
     </div>

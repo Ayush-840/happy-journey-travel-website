@@ -22,8 +22,11 @@ export default function BookingModal({ type, data, citySlug, onClose }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-box">
+    <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()} style={{ display: "flex", alignItems: "flex-end", padding: 0 }}>
+      <div className="modal-box" style={{ 
+        borderBottomLeftRadius: 0, borderBottomRightRadius: 0, 
+        maxHeight: "85vh", transition: "transform 0.3s ease-out" 
+      }}>
         <div style={{ fontSize: 48, marginBottom: 8 }}>{isStay ? "🏨" : "🚕"}</div>
         <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>
           {isStay ? `Book ${data.name}` : `Book ${data.type}`}

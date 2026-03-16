@@ -32,7 +32,7 @@ export default function CityPage() {
       {/* Hero */}
       <div style={{ position: "relative", height: "65vh", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${data.hero_image}')`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.4)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(15,23,42,0.3) 60%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(153,27,27,0.15) 60%, transparent 100%)" }} />
         <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 24px" }}>
           <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap", justifyContent: "center" }}>
             <Link href="/" style={{ color: "#64748b", textDecoration: "none", fontSize: 13 }}>Home</Link>
@@ -44,15 +44,15 @@ export default function CityPage() {
           <h1 style={{ fontSize: "clamp(2.5rem, 7vw, 4.5rem)", fontWeight: 800, color: "white", marginBottom: 16 }}>{data.name}</h1>
           <p style={{ fontSize: "clamp(0.9rem, 2vw, 1.1rem)", color: "#cbd5e1", maxWidth: 600, lineHeight: 1.7 }}>{data.description}</p>
           <div style={{ marginTop: 20, display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-            <span className="badge badge-blue">📍 {data.lat?.toFixed(4)}, {data.lng?.toFixed(4)}</span>
+            <span className="badge badge-classy">📍 {data.lat?.toFixed(4)}, {data.lng?.toFixed(4)}</span>
             <span className="badge badge-primary">🏛️ {data.places?.length} Attractions</span>
           </div>
         </div>
       </div>
 
       {/* Places Grid */}
-      <section style={{ padding: "80px 24px 120px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ padding: "80px 0 120px" }}>
+        <div className="container">
           <div style={{ marginBottom: 48 }}>
             <span className="badge badge-primary" style={{ marginBottom: 12 }}>🏛️ Top Attractions</span>
             <h2 className="section-title">Must-Visit Places in {data.name}</h2>
@@ -67,7 +67,7 @@ export default function CityPage() {
                     height: 220, backgroundImage: `url('${place.hero_image}')`,
                     backgroundSize: "cover", backgroundPosition: "center", position: "relative"
                   }}>
-                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,23,42,0.95) 0%, transparent 60%)" }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(212,175,55,0.1) 60%, transparent 100%)" }} />
                     {/* Tags */}
                     <div style={{ position: "absolute", top: 14, left: 14, display: "flex", gap: 6, flexWrap: "wrap" }}>
                       {place.tags?.slice(0, 2).map(t => (

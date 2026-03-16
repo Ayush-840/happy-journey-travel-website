@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ✈️ Happy Journey: Premium Indian Travel Portal
 
-## Getting Started
+**Happy Journey** is a state-of-the-art, visually stunning travel exploration platform designed to showcase the hidden gems of India. Built with a focus on premium aesthetics, the application offers an immersive experience for travelers planning their next adventure.
 
-First, run the development server:
+![Happy Journey Preview](https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1200)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **🌅 Immersive Destination Cards**: Rich, high-quality visuals for destinations in regions like:
+  - **Arunachal Pradesh** (Tawang, Ziro Valley, Mechuka, etc.)
+  - **Andaman & Nicobar Islands** (Radhanagar Beach, Cellular Jail, Indira Point, etc.)
+  - **Rajasthan**, **Goa**, **Kerala**, and more.
+- **🪄 Liquid UI Design**: Glassmorphism effects, dynamic gradients, and smooth micro-animations for a premium feel.
+- **🗓️ Integrated Trip Planner**: A dedicated section to help users organize their itineraries.
+- **🛠️ Admin Dashboard**: Secure management of destinations, bookings, and site content.
+- **📱 Fully Responsive**: Optimized for seamless experiences across mobile, tablet, and desktop.
+- **🗃️ Dynamic Database**: Powered by SQLite for fast, local data management with comprehensive location metadata.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🚀 Technical Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend**: [Next.js](https://nextjs.org/) (React), Vanilla CSS (Custom Glassmorphism system).
+- **Backend/API**: Next.js Server Components and Route Handlers.
+- **Database**: [SQLite](https://www.sqlite.org/) with `better-sqlite3`.
+- **Assets**: High-resolution photography sourced via Unsplash.
 
-## Learn More
+## 🛠️ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js (v18 or higher)
+- npm or yarn
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Installation
 
-## Deploy on Vercel
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/happy-journey.git
+   cd happy-journey
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Initialize the Database**:
+   The project comes with a seeding script to populate destinations.
+   ```bash
+   # If you need to re-seed or refresh the database
+   node refresh_db.js
+   ```
+
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Open the app**:
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the result.
+
+## 📂 Project Structure
+
+- `app/`: Next.js App Router pages and layouts.
+- `components/`: Reusable UI components (Navbar, StateCards, BookingModal).
+- `lib/`: Database configuration (`db.js`) and core logic.
+- `public/`: Static assets and images.
+
+---
+
+*Designed with ❤️ for travelers by Ayush-840*

@@ -32,7 +32,7 @@ export default function StatePage() {
       {/* Hero */}
       <div style={{ position: "relative", height: "65vh", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${data.hero_image}')`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.4)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(15,23,42,0.3) 60%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(212,175,55,0.1) 60%, transparent 100%)" }} />
         <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 24px" }}>
           <Link href="/" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 13, marginBottom: 20, display: "flex", alignItems: "center", gap: 6 }}>
             ← Back to Home
@@ -48,8 +48,8 @@ export default function StatePage() {
       </div>
 
       {/* Cities */}
-      <section style={{ padding: "80px 24px 60px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ padding: "80px 0 60px" }}>
+        <div className="container">
           <div style={{ marginBottom: 48 }}>
             <span className="badge badge-primary" style={{ marginBottom: 12 }}>🏙️ {data.cities?.length} Destinations</span>
             <h2 className="section-title">Explore Cities in {data.name}</h2>
@@ -64,7 +64,7 @@ export default function StatePage() {
                     height: 220, backgroundImage: `url('${city.hero_image}')`,
                     backgroundSize: "cover", backgroundPosition: "center", position: "relative"
                   }}>
-                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,23,42,0.95) 0%, transparent 60%)" }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,5,5,0.95) 0%, transparent 60%)" }} />
                     <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 20px" }}>
                       <h3 style={{ fontSize: 20, fontWeight: 700, color: "white" }}>{city.name}</h3>
                     </div>
@@ -128,13 +128,13 @@ export default function StatePage() {
       </section>
 
       {/* Map Section */}
-      <section style={{ padding: "60px 24px 120px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ padding: "60px 0 120px" }}>
+        <div className="container">
           <h2 className="section-title" style={{ textAlign: "left" }}>Explore on Map</h2>
           <div className="glass-card" style={{ marginTop: 32, padding: 12, borderRadius: 24, overflow: "hidden" }}>
              <iframe
                 src={`https://maps.google.com/maps?q=${data.name}&z=6&output=embed`}
-                style={{ width: "100%", height: 450, border: "none" }}
+                style={{ width: "100%", height: 350, border: "none" }}
                 allowFullScreen loading="lazy"
              />
           </div>

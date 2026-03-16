@@ -19,10 +19,10 @@ export default function Navbar() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 44, height: 44, borderRadius: 12,
-            background: "linear-gradient(135deg, #f97316, #ea580c)",
+            background: "linear-gradient(135deg, #ef4444, #f87171)",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 18, color: "white",
-            boxShadow: "0 4px 15px rgba(249,115,22,0.4)"
+            boxShadow: "0 4px 15px rgba(239,68,68,0.4)"
           }}>HJ</div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 17, color: "white", letterSpacing: "-0.3px" }}>Happy Journey</div>
@@ -34,7 +34,7 @@ export default function Navbar() {
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="desktop-nav">
           {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
             <Link key={label} href={href} style={{ color: "#cbd5e1", textDecoration: "none", fontSize: 14, fontWeight: 500, transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = "#f97316"}
+              onMouseEnter={e => e.target.style.color = "var(--primary)"}
               onMouseLeave={e => e.target.style.color = "#cbd5e1"}>
               {label}
             </Link>
@@ -54,9 +54,10 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div style={{
-          marginTop: 12, padding: "20px 24px",
-          background: "rgba(15,23,42,0.97)", borderRadius: 12,
-          border: "1px solid rgba(255,255,255,0.1)", display: "flex", flexDirection: "column", gap: 12
+          marginTop: 12, padding: "24px",
+          background: "var(--dark-2)", borderRadius: 16,
+          border: "1px solid var(--glass-border)", display: "flex", flexDirection: "column", gap: 12,
+          boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
         }}>
           {[["🏠 Home", "/"], ["🗺️ Explore", "#states"], ["ℹ️ About", "#about"], ["🔐 Admin", "/admin"]].map(([label, href]) => (
             <Link key={label} href={href} onClick={() => setMenuOpen(false)}

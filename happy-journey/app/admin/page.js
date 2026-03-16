@@ -15,10 +15,10 @@ export default function AdminPage() {
     ]).then(([tData, sData]) => {
       if (tData.success) setTransports(tData.data);
       else setError(tData.error);
-      
+
       if (sData.success) setStays(sData.data);
       else setError(sData.error);
-      
+
       setLoading(false);
     }).catch(err => {
       setError(err.message);
@@ -31,7 +31,7 @@ export default function AdminPage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white" }}>
       <Navbar />
-      
+
       <main style={{ padding: "100px 24px 60px", maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ marginBottom: 40, borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: 20 }}>
           <span className="badge badge-primary" style={{ marginBottom: 12 }}>🔒 Admin Dashboard</span>
@@ -39,7 +39,7 @@ export default function AdminPage() {
           <p style={{ color: "#94a3b8", marginTop: 8 }}>View all incoming transport and stay bookings.</p>
         </div>
 
-        {error && <div style={{ padding: 20, background: "rgba(239, 68, 68, 0.1)", color: "#ef4444", borderRadius: 12, marginBottom: 30 }}>Error: {error}</div>}
+        {error && <div style={{ padding: 20, background: "rgba(220, 17, 17, 0.1)", color: "#ef4444", borderRadius: 12, marginBottom: 30 }}>Error: {error}</div>}
 
         {/* TRANSPORT BOOKINGS */}
         <section style={{ marginBottom: 60 }}>
@@ -47,11 +47,11 @@ export default function AdminPage() {
             🚕 Transport Bookings
             <span style={{ fontSize: 13, padding: "4px 12px", background: "rgba(255,255,255,0.1)", borderRadius: 20, color: "white" }}>{transports.length} total</span>
           </h2>
-          
-          <div className="glass-card" style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+
+          <div className="glass-card table-responsive">
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", minWidth: 800 }}>
               <thead>
-                <tr style={{ background: "rgba(255,255,255,0.05)", color: "#94a3b8", fontSize: 13, textTransform: "uppercase", letterSpacing: 1 }}>
+                <tr style={{ background: "rgba(212, 175, 55, 0.15)", color: "#fff8e1", fontSize: 13, textTransform: "uppercase", letterSpacing: 1 }}>
                   <th style={{ padding: "16px 20px" }}>ID</th>
                   <th style={{ padding: "16px 20px" }}>Customer</th>
                   <th style={{ padding: "16px 20px" }}>Phone</th>
@@ -71,7 +71,7 @@ export default function AdminPage() {
                       <td style={{ padding: "16px 20px", fontWeight: 600 }}>{t.user_name}</td>
                       <td style={{ padding: "16px 20px" }}>{t.user_phone}</td>
                       <td style={{ padding: "16px 20px" }}>{t.from_city} → {t.to_city}</td>
-                      <td style={{ padding: "16px 20px" }}><span className="badge badge-blue">{t.transport_type}</span></td>
+                      <td style={{ padding: "16px 20px" }}><span className="badge badge-primary">{t.transport_type}</span></td>
                       <td style={{ padding: "16px 20px" }}>{t.travel_date}</td>
                       <td style={{ padding: "16px 20px", color: "#10b981", fontWeight: 600 }}>{t.status}</td>
                     </tr>
@@ -84,15 +84,15 @@ export default function AdminPage() {
 
         {/* STAY BOOKINGS */}
         <section>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: 20, color: "#3b82f6", display: "flex", gap: 10, alignItems: "center" }}>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: 20, color: "var(--primary)", display: "flex", gap: 10, alignItems: "center" }}>
             🏨 Stay / Hotel Bookings
             <span style={{ fontSize: 13, padding: "4px 12px", background: "rgba(255,255,255,0.1)", borderRadius: 20, color: "white" }}>{stays.length} total</span>
           </h2>
-          
-          <div className="glass-card" style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+
+          <div className="glass-card table-responsive">
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", minWidth: 800 }}>
               <thead>
-                <tr style={{ background: "rgba(255,255,255,0.05)", color: "#94a3b8", fontSize: 13, textTransform: "uppercase", letterSpacing: 1 }}>
+                <tr style={{ background: "rgba(212, 175, 55, 0.15)", color: "#fff8e1", fontSize: 13, textTransform: "uppercase", letterSpacing: 1 }}>
                   <th style={{ padding: "16px 20px" }}>ID</th>
                   <th style={{ padding: "16px 20px" }}>Customer</th>
                   <th style={{ padding: "16px 20px" }}>Phone</th>

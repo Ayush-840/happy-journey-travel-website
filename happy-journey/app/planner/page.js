@@ -40,15 +40,15 @@ export default function PlannerPage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white" }}>
       <Navbar />
-      <main style={{ padding: "100px 24px", maxWidth: 1000, margin: "0 auto" }}>
+      <main className="container" style={{ padding: "100px 0 60px" }}>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <span className="badge badge-primary">✨ AI Powered</span>
           <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, margin: "20px 0" }}>Smart Trip Planner</h1>
           <p style={{ color: "#94a3b8", fontSize: "1.1rem" }}>Tell us your destination, and we'll craft the perfect journey for you.</p>
         </div>
 
-        <div className="glass-card" style={{ padding: 40, marginBottom: 60 }}>
-          <form onSubmit={generateTrip} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24, alignItems: "end" }}>
+        <div className="glass-card" style={{ padding: "clamp(20px, 5vw, 40px)", marginBottom: 60 }}>
+          <form onSubmit={generateTrip} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "24px 20px", alignItems: "end" }}>
             <div>
               <label style={{ display: "block", marginBottom: 8, fontSize: 13, color: "#94a3b8" }}>State</label>
               <select value={formData.state} onChange={handleStateChange} style={{ width: "100%", padding: 12, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "white" }} required>
@@ -89,13 +89,13 @@ export default function PlannerPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
               {itinerary.itinerary.map(day => (
                 <div key={day.day} className="glass-card" style={{ padding: 0, overflow: "hidden" }}>
-                  <div style={{ padding: "20px 30px", background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <h3 style={{ fontSize: "1.3rem", fontWeight: 700 }}>{day.title}</h3>
-                    <span className="badge badge-blue">Day {day.day}</span>
+                  <div style={{ padding: "20px clamp(16px, 4vw, 30px)", background: "rgba(212, 175, 55, 0.08)", borderBottom: "1px solid rgba(212, 175, 55, 0.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+                    <h3 style={{ fontSize: "clamp(1.1rem, 3vw, 1.3rem)", fontWeight: 700 }}>{day.title}</h3>
+                    <span className="badge badge-classy" style={{ flexShrink: 0 }}>Day {day.day}</span>
                   </div>
-                  <div style={{ padding: 30 }}>
-                    <p style={{ color: "#94a3b8", marginBottom: 24 }}>{day.description}</p>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+                  <div style={{ padding: "clamp(16px, 4vw, 30px)" }}>
+                    <p style={{ color: "#94a3b8", marginBottom: 24, fontSize: "clamp(13px, 2vw, 14px)", lineHeight: 1.6 }}>{day.description}</p>
+                    <div className="grid-places" style={{ gap: 20 }}>
                       {day.activities.map((act, idx) => (
                         <div key={idx} className="glass-card" style={{ padding: 16, background: "rgba(255,255,255,0.02)" }}>
                           <div style={{ height: 160, borderRadius: 12, backgroundImage: `url('${act.image}')`, backgroundSize: "cover", backgroundPosition: "center", marginBottom: 16 }} />

@@ -53,7 +53,7 @@ export default function HomePage() {
           filter: "brightness(0.45)"
         }} />
         {/* Overlay gradient */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0.4) 50%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--dark) 0%, rgba(18,18,18,0.4) 50%, transparent 100%)" }} />
 
         {/* Floating particles */}
         {[...Array(6)].map((_, i) => (
@@ -71,7 +71,7 @@ export default function HomePage() {
           </div>
 
           <h1 className="fade-up-1" style={{ fontSize: "clamp(2.5rem, 8vw, 5.5rem)", fontWeight: 800, lineHeight: 1.1, marginBottom: 16, letterSpacing: "-1px" }}>
-            <span style={{ background: "linear-gradient(135deg, #fff 30%, #f97316 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #fff 30%, var(--primary) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Discover the
             </span>
             <br />
@@ -109,12 +109,12 @@ export default function HomePage() {
       </section>
 
       {/* STATS BAR */}
-      <section style={{ background: "var(--dark-2)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "28px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, textAlign: "center" }}>
+      <section style={{ background: "var(--dark-2)", borderTop: "1px solid rgba(212,175,55,0.06)", borderBottom: "1px solid rgba(212,175,55,0.06)", padding: "40px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "32px 24px", textAlign: "center" }}>
           {[["10+", "States"], ["50+", "Cities"], ["100+", "Places"], ["24/7", "Support"]].map(([num, label]) => (
             <div key={label}>
-              <div style={{ fontSize: 28, fontWeight: 800, color: "var(--primary)" }}>{num}</div>
-              <div style={{ fontSize: 13, color: "#64748b", marginTop: 2 }}>{label}</div>
+              <div style={{ fontSize: "clamp(1.5rem, 4vw, 1.8rem)", fontWeight: 800, color: "var(--primary)", marginBottom: 4 }}>{num}</div>
+              <div style={{ fontSize: 13, color: "#64748b", fontWeight: 500, letterSpacing: 1 }}>{label}</div>
             </div>
           ))}
         </div>
@@ -122,10 +122,14 @@ export default function HomePage() {
 
       {/* NEARBY SECTION */}
       {(nearby.length > 0 || nearbyLoading) && (
-        <section id="nearby" style={{ padding: "80px 24px" }}>
+        <section id="nearby" style={{
+          padding: "80px 24px",
+          background: "linear-gradient(to bottom, var(--dark), var(--dark-2))",
+          position: "relative"
+        }}>
           <div style={{ maxWidth: 1280, margin: "0 auto" }}>
             <div style={{ marginBottom: 40 }}>
-              <span className="badge badge-blue" style={{ marginBottom: 12 }}>📍 Based on Your Location</span>
+              <span className="badge badge-classy" style={{ marginBottom: 12 }}>📍 Based on Your Location</span>
               <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.2rem)" }}>Places Near You</h2>
               <p className="section-subtitle">Discover amazing destinations within reach</p>
             </div>
@@ -141,7 +145,7 @@ export default function HomePage() {
                       <div className="glass-card hover-card" style={{ overflow: "hidden" }}>
                         <div style={{ height: 160, backgroundImage: `url('${place.hero_image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
                         <div style={{ padding: 16 }}>
-                          <div style={{ fontSize: 11, color: "var(--secondary)", fontWeight: 600, marginBottom: 4, letterSpacing: 1 }}>
+                          <div style={{ fontSize: 11, color: "var(--primary)", fontWeight: 600, marginBottom: 4, letterSpacing: 1 }}>
                             📍 {place.distance_km.toFixed(0)} km away
                           </div>
                           <h3 style={{ fontWeight: 700, fontSize: 15, color: "white" }}>{place.name}</h3>
@@ -154,7 +158,7 @@ export default function HomePage() {
                       <div className="glass-card hover-card" style={{ overflow: "hidden" }}>
                         <div style={{ height: 160, backgroundImage: `url('${place.hero_image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
                         <div style={{ padding: 16 }}>
-                          <div style={{ fontSize: 11, color: "var(--secondary)", fontWeight: 600, marginBottom: 4, letterSpacing: 1 }}>
+                          <div style={{ fontSize: 11, color: "var(--primary)", fontWeight: 600, marginBottom: 4, letterSpacing: 1 }}>
                             📍 {place.distance_km.toFixed(2)} km away
                           </div>
                           <h3 style={{ fontWeight: 700, fontSize: 15, color: "white" }}>{place.name}</h3>
@@ -171,7 +175,12 @@ export default function HomePage() {
       )}
 
       {/* STATES GRID */}
-      <section id="states" style={{ padding: "80px 24px 120px" }}>
+      <section id="states" style={{
+        padding: "80px 24px 120px",
+        background: "linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 50%, var(--dark-3) 100%)",
+        position: "relative",
+        color: "white"
+      }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <span className="badge badge-primary" style={{ marginBottom: 12 }}>🇮🇳 Explore India</span>
@@ -187,7 +196,7 @@ export default function HomePage() {
             <div className="grid-states">
               {states.map((state, idx) => (
                 <Link key={state.slug} href={`/state/${state.slug}`} style={{ textDecoration: "none" }}>
-                  <div className="glass-card hover-card" style={{ overflow: "hidden", animationDelay: `${idx * 0.05}s` }}>
+                  <div className="glass-card hover-card" style={{ overflow: "hidden", animationDelay: `${idx * 0.05}s`, boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
                     <div style={{
                       height: 200,
                       backgroundImage: `url('${state.hero_image}')`,
@@ -201,7 +210,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div style={{ padding: 16 }}>
-                      <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                         {state.description}
                       </p>
                       <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 6, color: "var(--primary)", fontSize: 13, fontWeight: 600 }}>
@@ -217,23 +226,28 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section id="about" style={{ padding: "80px 24px", background: "var(--dark-2)", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <section id="about" style={{ 
+        padding: "100px 24px", 
+        background: "radial-gradient(circle at top, var(--dark-2) 0%, var(--dark) 100%)", 
+        borderTop: "1px solid rgba(212,175,55,0.12)", 
+        position: "relative" 
+      }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <h2 className="section-title">Everything You Need to Travel</h2>
             <p className="section-subtitle">One platform. Complete travel solution.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {[
               { icon: "🗺️", title: "Discover Places", desc: "Explore 100+ handpicked tourist destinations across 10 Indian states with rich photos and detailed guides." },
               { icon: "🚕", title: "Book Transport", desc: "Instantly book cabs, bikes, scooters, and buses. Get price estimates and confirm your ride in seconds." },
               { icon: "🏨", title: "Find Stays", desc: "From luxury resorts to budget hostels — find and book the perfect accommodation for your trip." },
               { icon: "📍", title: "Nearby Finder", desc: "Auto-detect your location and discover amazing places, attractions, and experiences near you." },
             ].map(f => (
-              <div key={f.title} className="glass-card" style={{ padding: 28 }}>
-                <div style={{ fontSize: 40, marginBottom: 16 }}>{f.icon}</div>
-                <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 10, color: "white" }}>{f.title}</h3>
-                <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7 }}>{f.desc}</p>
+              <div key={f.title} className="glass-card" style={{ padding: "32px 24px", textAlign: "center" }}>
+                <div style={{ fontSize: 48, marginBottom: 20 }}>{f.icon}</div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "white" }}>{f.title}</h3>
+                <p style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.7 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -244,7 +258,7 @@ export default function HomePage() {
       <footer style={{ padding: "40px 24px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg, #f97316, #ea580c)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "white", fontSize: 15 }}>HJ</div>
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg, #ef4444, #f87171)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "white", fontSize: 15 }}>HJ</div>
             <span style={{ fontWeight: 700, color: "white" }}>Happy Journey</span>
           </div>
           <p style={{ color: "#475569", fontSize: 13 }}>© 2026 Happy Journey · Discover India, one state at a time 🇮🇳</p>
