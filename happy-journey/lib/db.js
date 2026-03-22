@@ -1,11 +1,24 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 
 let db;
 
 export function getDB() {
   if (!db) {
-    db = new Database(path.join(process.cwd(), 'happy_journey.db'));
+    const dbPath = path.join(process.cwd(), 'happy_journey.db');
+    
+    if (process.env.VERCEL) {
+      // On Vercel, copy the database to the writeable /tmp directory
+      const tmpPath = path.join('/tmp', 'happy_journey.db');
+      if (!fs.existsSync(tmpPath) && fs.existsSync(dbPath)) {
+        fs.copyFileSync(dbPath, tmpPath);
+      }
+      db = new Database(tmpPath);
+    } else {
+      db = new Database(dbPath);
+    }
+
     db.pragma('journal_mode = WAL');
     initSchema();
     seedData();
