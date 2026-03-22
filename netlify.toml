@@ -1,0 +1,4 @@
+[build]
+  base = "happy-journey"
+  command = "npm run build"
+  publish = ".next"
