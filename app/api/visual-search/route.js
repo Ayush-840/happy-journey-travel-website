@@ -22,15 +22,17 @@ export async function POST(request) {
     const imageBase64 = imageBuffer.toString("base64");
 
     const prompt = `Identify the location or landmark in this photo. 
-      Return ONLY JSON in this format: 
+      Return ONLY a JSON object and nothing else. No preamble, no post-text.
+      
+      JSON Schema:
       { 
         "location_name": "Name of the place, City", 
         "coordinates": { "lat": number, "lng": number }, 
         "confidence": number, 
         "success": boolean,
-        "summary": "Short 1-sentence description of the landmark"
+        "summary": "Short 1-sentence description of why this is a great travel spot"
       }
-      If you can't identify it with confidence > 0.5, set success to false.`;
+      If you can't identify it, set success to false. Try your best to identify it even if it's not a major landmark.`;
 
     const result = await model.generateContent([
       prompt,
@@ -38,11 +40,18 @@ export async function POST(request) {
     ]);
 
     const textResponse = result.response.text();
-    // Clean JSON from potential markdown backticks
-    const jsonStr = textResponse.replace(/```json|```/g, "").trim();
+    // More robust JSON extraction (find the first { and last })
+    const startIdx = textResponse.indexOf("{");
+    const endIdx = textResponse.lastIndexOf("}");
+    
+    if (startIdx === -1 || endIdx === -1) {
+      throw new Error("AI returned an invalid response format.");
+    }
+
+    const jsonStr = textResponse.substring(startIdx, endIdx + 1);
     const aiData = JSON.parse(jsonStr);
 
-    if (!aiData.success || aiData.confidence < 0.5) {
+    if (!aiData.success || (aiData.confidence < 0.4)) {
       return NextResponse.json({ success: false, error: 'Location unidentified.' });
     }
 
