@@ -7,10 +7,12 @@ import BookingModal from "@/components/BookingModal";
 import PlaceReviews from "@/components/PlaceReviews";
 import CrowdBadge from "@/components/CrowdBadge";
 import SafetyMeter from "@/components/SafetyMeter";
+import { isWithinRadius } from "@/lib/geo-utils";
 
 export default function PlacePage() {
   const { slug } = useParams();
   const [place, setPlace] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
   const [transport, setTransport] = useState([]);
   const [stays, setStays] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,6 +54,15 @@ export default function PlacePage() {
 
   useEffect(() => {
     fetchData();
+
+    // Get user location for geofencing
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        null,
+        { enableHighAccuracy: true }
+      );
+    }
   }, [slug]);
 
   if (error) return (
@@ -133,6 +144,18 @@ export default function PlacePage() {
 
           <div style={{ marginTop: 20, maxWidth: 400 }}>
              <SafetyMeter placeId={slug} />
+          </div>
+
+          <div style={{ marginTop: 24 }}>
+             {userLocation && isWithinRadius(userLocation.lat, userLocation.lng, place, 0.5) ? (
+                <Link href={`/discover/${slug}`} className="btn-primary" style={{ padding: "14px 28px", fontSize: 13, background: "linear-gradient(45deg, #d4af37, #f1c40f)", border: "none", boxShadow: "0 0 20px rgba(212, 175, 55, 0.3)" }}>
+                   ✨ Open AR Time Machine
+                </Link>
+             ) : (
+                <div style={{ padding: "12px 20px", background: "rgba(255,255,255,0.05)", borderRadius: 12, border: "1px dashed rgba(255,255,255,0.2)", fontSize: 12, color: "#94a3b8", display: "inline-flex", alignItems: "center", gap: 8 }}>
+                   📍 Visit {place.name} to unlock the AR Time Machine
+                </div>
+             )}
           </div>
 
           {/* Image dots */}

@@ -1,108 +1,105 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import ARMonumentView from "@/components/ARMonumentView";
-import Navbar from "@/components/Navbar";
-import { getDistanceInMeters } from "@/lib/geo-utils";
+import { useParams, useRouter } from "next/navigation";
+import ARView from "@/components/ARView";
+import { isWithinRadius } from "@/lib/geo-utils";
 
-export default function DiscoverPage() {
+export default function ARDiscoverPage() {
   const { slug } = useParams();
+  const router = useRouter();
   const [monument, setMonument] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
-  const [isNear, setIsNear] = useState(false);
+  const [opacity, setOpacity] = useState(0.7);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // 1. Fetch monument data
-    const fetchMonument = async () => {
-      try {
-        const res = await fetch(`/api/places?slug=${slug}`);
-        const data = await res.json();
-        if (data.success) {
-          setMonument(data.data);
-        } else {
-          setError("Monument not found.");
-        }
-      } catch (err) {
-        setError("Error loading discovery data.");
-      }
-    };
+    // 1. Fetch Monument
+    fetch(`/api/places/${slug}`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) setMonument(d.data);
+        else setError("Monument not found.");
+      })
+      .catch(() => setError("Error loading data."));
 
-    fetchMonument();
-
-    // 2. Track user location for geofencing
+    // 2. Request Precision GPS
     if ("geolocation" in navigator) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          setLoading(false);
         },
         (err) => {
-          console.error("Geolocation error:", err);
-          setError("Please enable location access to unlock historical AR.");
+          setError("GPS Permission Denied. Please enable location to use AR.");
+          setLoading(false);
         },
         { enableHighAccuracy: true }
       );
     } else {
-      setError("Your browser doesn't support geolocation.");
+      setError("Geolocation not supported by your browser.");
+      setLoading(false);
     }
   }, [slug]);
 
-  useEffect(() => {
-    if (userLocation && monument && monument.lat && monument.lng) {
-      const distance = getDistanceInMeters(
-        userLocation.lat, userLocation.lng,
-        monument.lat, monument.lng
-      );
-      // Only unlock AR if within 100 meters
-      setIsNear(distance <= 100);
-    }
-  }, [userLocation, monument]);
-
-  if (loading && !monument && !error) return (
-    <div style={{ height: "100vh", background: "var(--dark)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-      <div className="skeleton" style={{ width: 40, height: 40, borderRadius: "50%", marginBottom: 20 }}></div>
-      Unlocking Discovery...
+  if (loading) return (
+    <div style={{ height: "100vh", background: "black", display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}>
+       Initializing GPS & Camera...
     </div>
   );
 
   if (error) return (
-    <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white" }}>
-      <Navbar />
-      <div style={{ padding: "120px 24px", maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ fontSize: "1.8rem", fontWeight: 800, marginBottom: 20, color: "#ef4444" }}>Discovery Locked</h2>
-        <p style={{ color: "#94a3b8", lineHeight: 1.6 }}>{error}</p>
-        <button onClick={() => window.location.href = '/'} className="btn-primary" style={{ marginTop: 30, display: "inline-flex" }}>Back Home</button>
-      </div>
+    <div style={{ height: "100vh", background: "black", display: "flex", alignItems: "center", justifyContent: "center", color: "white", padding: 40, textAlign: "center" }}>
+       <div>
+         <div style={{ fontSize: 48, marginBottom: 20 }}>🚧</div>
+         <h2>{error}</h2>
+         <button onClick={() => router.back()} style={{ marginTop: 20, padding: "10px 20px" }}>Go Back</button>
+       </div>
     </div>
   );
 
+  // 3. Geofencing Final Check
+  const nearby = isWithinRadius(userLocation?.lat, userLocation?.lng, monument, 0.5); // 500m
+
+  if (!nearby && process.env.NODE_ENV === "production") {
+    return (
+      <div style={{ height: "100vh", background: "black", display: "flex", alignItems: "center", justifyContent: "center", color: "white", padding: 40, textAlign: "center" }}>
+         <div>
+           <div style={{ fontSize: 48, marginBottom: 20 }}>📍</div>
+           <h2>Out of Range</h2>
+           <p style={{ color: "#94a3b8", marginTop: 8 }}>You must be within 500m of {monument.name} to view the Time Machine.</p>
+           <button onClick={() => router.back()} style={{ marginTop: 20, padding: "10px 20px" }}>Go Back</button>
+         </div>
+      </div>
+    );
+  }
+
   return (
-    <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white" }}>
-      {!isNear ? (
-        <>
-          <Navbar />
-          <div style={{ padding: "120px 24px", maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-             <div style={{ width: 80, height: 80, borderRadius: 20, background: "rgba(212, 175, 55, 0.1)", margin: "0 auto 30px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem" }}>📍</div>
-             <h2 style={{ fontSize: "2rem", fontWeight: 800, marginBottom: 12 }}>You are nearby {monument?.name}!</h2>
-             <p style={{ color: "#94a3b8", lineHeight: 1.6, marginBottom: 40 }}>
-                Get within 100 meters to unlock the historical AR view. You'll need to look at the monument through your camera.
-             </p>
-             <div style={{ padding: "20px", background: "rgba(255,255,255,0.02)", borderRadius: 12, border: "1px dashed rgba(255,255,255,0.1)" }}>
-               <span style={{ fontSize: 13, color: "var(--primary)", fontWeight: 700 }}>DISTANCE CHECKING...</span>
-               <div style={{ fontSize: 24, fontWeight: 800, marginTop: 10 }}>Calculating Distance</div>
-             </div>
-             <button onClick={() => setIsNear(true)} className="btn-primary" style={{ marginTop: 40, width: "100%", justifyContent: "center" }}>
-                Force Unlock AR (Development Mode)
-             </button>
-          </div>
-        </>
-      ) : (
-        <ARMonumentView monument={monument} />
-      )}
+    <div style={{ height: "100vh", background: "black", overflow: "hidden" }}>
+      {/* FULL SCREEN AR VIEW */}
+      <ARView monument={monument} historicalOpacity={opacity} />
+
+      {/* REACT OVERLAY CONTROLS */}
+      <div style={{ position: "fixed", bottom: 100, left: "50%", transform: "translateX(-50%)", zIndex: 2000, width: "80%", maxWidth: 300 }}>
+        <input 
+          type="range" min="0" max="1" step="0.01" value={opacity} 
+          onChange={(e) => setOpacity(parseFloat(e.target.value))}
+          style={{ width: "100%", cursor: "pointer", appearance: "none", height: 10, background: "rgba(255,255,255,0.2)", borderRadius: 5 }}
+        />
+        <div style={{ textAlign: "center", color: "white", fontSize: 10, fontWeight: 800, marginTop: 8, letterSpacing: 1 }}>
+           PAST 👁️ TIMELINE
+        </div>
+      </div>
+
+      <button onClick={() => router.back()} style={{ position: "fixed", top: 30, left: 24, zIndex: 2001, background: "rgba(0,0,0,0.5)", border: "none", color: "white", padding: "10px 16px", borderRadius: 10, fontSize: 14 }}>
+         ✕ CLOSE
+      </button>
+
+      {/* HUD Info */}
+      <div style={{ position: "fixed", top: 30, right: 24, zIndex: 2001, textAlign: "right" }}>
+         <div style={{ color: "white", fontWeight: 800, fontSize: 12 }}>{monument.name}</div>
+         <div style={{ color: "var(--primary)", fontSize: 10 }}>HISTORICAL OVERLAY ACTIVE</div>
+      </div>
     </div>
   );
 }
