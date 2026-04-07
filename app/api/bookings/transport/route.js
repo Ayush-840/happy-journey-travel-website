@@ -25,8 +25,12 @@ export async function GET(request) {
 
     console.log(`[AuthDebug] Header Length: ${authHeader?.length}, Secret Length: ${adminPassword?.length}`);
 
+    if (!adminPassword) {
+      return NextResponse.json({ success: false, error: 'Server configuration error: ADMIN_PASSWORD is not set in environment variables.' }, { status: 500 });
+    }
+
     if (!authHeader || authHeader !== adminPassword) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized: Invalid password.' }, { status: 401 });
     }
 
     const db = getDB();

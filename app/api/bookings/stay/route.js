@@ -23,8 +23,12 @@ export async function GET(request) {
     const authHeader = request.headers.get('Authorization');
     const adminPassword = process.env.ADMIN_PASSWORD;
 
+    if (!adminPassword) {
+      return NextResponse.json({ success: false, error: 'Server configuration error: ADMIN_PASSWORD is not set in environment variables.' }, { status: 500 });
+    }
+
     if (!authHeader || authHeader !== adminPassword) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized: Invalid password.' }, { status: 401 });
     }
 
     const db = getDB();

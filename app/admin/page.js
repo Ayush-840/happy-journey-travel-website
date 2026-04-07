@@ -33,8 +33,8 @@ export default function AdminPage() {
       const tData = await tRes.json();
       const sData = await sRes.json();
 
-      if (tRes.status === 401 || sRes.status === 401) {
-        setLoginError("Invalid password. Please try again.");
+      if (tRes.status === 401 || sRes.status === 401 || tRes.status === 500 || sRes.status === 500) {
+        setLoginError(tData.error || sData.error || "Invalid password. Please try again.");
         localStorage.removeItem("admin_pass");
         setIsAuthenticated(false);
       } else {
