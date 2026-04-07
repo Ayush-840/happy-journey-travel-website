@@ -63,6 +63,7 @@ export default function Navbar() {
           {[
             ["🏠 Home", "/"], 
             ["🗺️ Explore", "#states"], 
+            ["🛡️ Safety Hub", "/safety"],
             ["🏝️ AI Planner", "/planner/generate"],
             ["📸 Visual Search", "/discover/visual"],
             ["🤝 Group Hub", "/group/join"],

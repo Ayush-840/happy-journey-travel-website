@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.variable} antialiased`}>
         {children}
         <ChatBot />
+        <SOSButton />
       </body>
     </html>
   );

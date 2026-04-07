@@ -5,6 +5,8 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BookingModal from "@/components/BookingModal";
 import PlaceReviews from "@/components/PlaceReviews";
+import CrowdBadge from "@/components/CrowdBadge";
+import SafetyMeter from "@/components/SafetyMeter";
 
 export default function PlacePage() {
   const { slug } = useParams();
@@ -122,11 +124,15 @@ export default function PlacePage() {
           <h1 style={{ fontSize: "clamp(2rem, 6vw, 4rem)", fontWeight: 800, color: "white", marginBottom: 12, lineHeight: 1.1 }}>{place.name}</h1>
           <p style={{ fontSize: "clamp(0.9rem, 1.8vw, 1.1rem)", color: "#cbd5e1", maxWidth: 620, lineHeight: 1.7 }}>{place.description}</p>
 
-          <div style={{ marginTop: 20, display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+            <CrowdBadge placeId={slug} />
             <span className="badge badge-classy">🗓️ Best: {place.best_time}</span>
             <span className="badge badge-primary">📍 {place.city_name}, {place.state_name}</span>
             <span className="badge badge-primary" style={{ background: "rgba(34,197,94,0.15)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }}>⭐ {place.rating} / 5.0</span>
-            <span className="badge badge-primary" style={{ background: "rgba(212, 175, 55, 0.15)", color: "#fff8e1", border: "1px solid rgba(212, 175, 55, 0.25)" }}>💰 Budget: {place.budget_per_day}</span>
+          </div>
+
+          <div style={{ marginTop: 20, maxWidth: 400 }}>
+             <SafetyMeter placeId={slug} />
           </div>
 
           {/* Image dots */}
