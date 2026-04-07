@@ -142,8 +142,20 @@ export default function HomePage() {
                 {nearby.slice(0, 8).map((place, idx) => (
                   place.slug ? (
                     <Link key={place.slug} href={`/place/${place.slug}`} style={{ textDecoration: "none" }}>
-                      <div className="glass-card hover-card" style={{ overflow: "hidden" }}>
+                      <div className="glass-card hover-card" style={{ overflow: "hidden", position: "relative" }}>
                         <div style={{ height: 160, backgroundImage: `url('${place.hero_image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                        
+                        {/* AR Discovery Trigger */}
+                        <Link href={`/discover/${place.slug}`} style={{ 
+                          position: "absolute", top: 12, right: 12, 
+                          background: "rgba(212, 175, 55, 0.9)", color: "var(--dark)",
+                          padding: "6px 12px", borderRadius: "20px", fontSize: 10, fontWeight: 800,
+                          boxShadow: "0 4px 15px rgba(0,0,0,0.3)", zIndex: 5,
+                          display: "flex", alignItems: "center", gap: 5, textDecoration: "none"
+                        }}>
+                          ✨ AR DISCOVER
+                        </Link>
+
                         <div style={{ padding: 16 }}>
                           <div style={{ fontSize: 11, color: "var(--primary)", fontWeight: 600, marginBottom: 4, letterSpacing: 1 }}>
                             📍 {place.distance_km.toFixed(0)} km away
