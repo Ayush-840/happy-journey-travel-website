@@ -246,8 +246,9 @@ export default function HomePage() {
       }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <h2 className="section-title">Everything You Need to Travel</h2>
-            <p className="section-subtitle">One platform. Complete travel solution.</p>
+            <span className="badge badge-primary" style={{ marginBottom: 12 }}>🚀 NEW: AI TRAVEL SUITE</span>
+            <h2 className="section-title">Revolutionary Collaboration Tools</h2>
+            <p className="section-subtitle">Plan, Vote, and Explore with your friends like never before.</p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {[
