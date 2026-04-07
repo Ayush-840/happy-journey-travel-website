@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export async function POST(request) {
   try {
@@ -9,26 +13,40 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'No image provided.' }, { status: 400 });
     }
 
-    // In a real app, you would use:
-    // const { response } = await model.generateContent([
-    //   "Identify the location in this photo. Return ONLY JSON: { 'location_name': 'string', 'lat': number, 'lng': number, 'success': boolean }",
-    //   { inlineData: { data: Buffer.from(await image.arrayBuffer()).toString("base64"), mimeType: "image/jpeg" } }
-    // ]);
-    
-    // Simulate AI delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY is not configured in environment variables.");
+    }
 
-    // High-quality mock identification results based on typical travel images (e.g. Taj Mahal)
-    // In production, this would be the actual data from Gemini
-    const mockMatch = {
-      location_name: "Taj Mahal, Agra",
-      coordinates: { lat: 27.1751, lng: 78.0421 },
-      confidence: 0.98,
-      success: true,
-      summary: "Identified the iconic ivory-white marble mausoleum on the south bank of the Yamuna river."
-    };
+    // Convert image to Base64
+    const imageBuffer = Buffer.from(await image.arrayBuffer());
+    const imageBase64 = imageBuffer.toString("base64");
 
-    return NextResponse.json({ success: true, data: mockMatch });
+    const prompt = `Identify the location or landmark in this photo. 
+      Return ONLY JSON in this format: 
+      { 
+        "location_name": "Name of the place, City", 
+        "coordinates": { "lat": number, "lng": number }, 
+        "confidence": number, 
+        "success": boolean,
+        "summary": "Short 1-sentence description of the landmark"
+      }
+      If you can't identify it with confidence > 0.5, set success to false.`;
+
+    const result = await model.generateContent([
+      prompt,
+      { inlineData: { data: imageBase64, mimeType: image.type } }
+    ]);
+
+    const textResponse = result.response.text();
+    // Clean JSON from potential markdown backticks
+    const jsonStr = textResponse.replace(/```json|```/g, "").trim();
+    const aiData = JSON.parse(jsonStr);
+
+    if (!aiData.success || aiData.confidence < 0.5) {
+      return NextResponse.json({ success: false, error: 'Location unidentified.' });
+    }
+
+    return NextResponse.json({ success: true, data: aiData });
   } catch (error) {
     console.error('Visual Search Error:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
