@@ -251,15 +251,19 @@ export default function HomePage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {[
-              { icon: "🗺️", title: "Discover Places", desc: "Explore 100+ handpicked tourist destinations across 10 Indian states with rich photos and detailed guides." },
-              { icon: "🚕", title: "Book Transport", desc: "Instantly book cabs, bikes, scooters, and buses. Get price estimates and confirm your ride in seconds." },
-              { icon: "🏨", title: "Find Stays", desc: "From luxury resorts to budget hostels — find and book the perfect accommodation for your trip." },
-              { icon: "📍", title: "Nearby Finder", desc: "Auto-detect your location and discover amazing places, attractions, and experiences near you." },
+              { icon: "🏝️", title: "AI Planner", desc: "Generate full day-by-day itineraries with AI based on your budget and interests." },
+              { icon: "📸", title: "Visual Search", desc: "Upload any travel photo and let our AI identify the location and create a plan." },
+              { icon: "🤝", title: "Group Lobby", desc: "Plan trips with friends in real-time. Vote on places and build a shared leaderboard." },
+              { icon: "📊", title: "Shared Expenses", desc: "Split costs automatically with friends using our minimized cash-flow algorithm." },
+              { icon: "🤳", title: "Social Feed", desc: "Share your travel reels and photos. Discover verified gems from our global community." },
+              { icon: "🚕", title: "Bookings", desc: "Seamlessly book cabs, bikes, and hotels for your destination in one click." },
+              { icon: "✨", title: "AR Discovery", desc: "Scan monuments with your camera at the destination to unlock hidden history and facts." },
+              { icon: "🪙", title: "HJ Rewards", desc: "Earn HJ Coins for verified reviews and photos to redeem for premium benefits." },
             ].map(f => (
-              <div key={f.title} className="glass-card" style={{ padding: "32px 24px", textAlign: "center" }}>
+              <div key={f.title} className="glass-card hover-card" style={{ padding: "32px 24px", textAlign: "center", animation: "fadeUp 0.5s ease" }}>
                 <div style={{ fontSize: 48, marginBottom: 20 }}>{f.icon}</div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "white" }}>{f.title}</h3>
-                <p style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.7 }}>{f.desc}</p>
+                <h3 style={{ fontSize: 1.15 + "rem", fontWeight: 800, marginBottom: 12, color: "white" }}>{f.title}</h3>
+                <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, height: 60, overflow: "hidden" }}>{f.desc}</p>
               </div>
             ))}
           </div>
