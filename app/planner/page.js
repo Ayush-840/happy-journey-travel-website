@@ -44,7 +44,7 @@ export default function PlannerPage() {
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <span className="badge badge-primary">✨ AI Powered</span>
           <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, margin: "20px 0" }}>Smart Trip Planner</h1>
-          <p style={{ color: "#94a3b8", fontSize: "1.1rem" }}>Tell us your destination, and we'll craft the perfect journey for you.</p>
+          <p style={{ color: "#94a3b8", fontSize: "1.1rem" }}>Tell us your destination, and we&apos;ll craft the perfect journey for you.</p>
         </div>
 
         <div className="glass-card" style={{ padding: "clamp(20px, 5vw, 40px)", marginBottom: 60 }}>
