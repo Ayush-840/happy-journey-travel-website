@@ -57,7 +57,8 @@ export default function Navbar() {
           marginTop: 12, padding: "24px",
           background: "var(--dark-2)", borderRadius: 16,
           border: "1px solid var(--glass-border)", display: "flex", flexDirection: "column", gap: 12,
-          boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
+          boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
+          maxHeight: "80vh", overflowY: "auto"
         }}>
           {[
             ["🏠 Home", "/"], 
