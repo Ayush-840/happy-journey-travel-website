@@ -7,26 +7,85 @@ export default function AdminPage() {
   const [stays, setStays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/bookings/transport').then(r => r.json()),
-      fetch('/api/bookings/stay').then(r => r.json())
-    ]).then(([tData, sData]) => {
-      if (tData.success) setTransports(tData.data);
-      else setError(tData.error);
-
-      if (sData.success) setStays(sData.data);
-      else setError(sData.error);
-
+    // Check if password exists in localStorage
+    const savedPass = localStorage.getItem("admin_pass");
+    if (savedPass) {
+      fetchBookings(savedPass);
+    } else {
       setLoading(false);
-    }).catch(err => {
-      setError(err.message);
-      setLoading(false);
-    });
+    }
   }, []);
 
-  if (loading) return <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white", padding: 100, textAlign: "center" }}>Loading Bookings...</div>;
+  const fetchBookings = async (pass) => {
+    setLoading(true);
+    setLoginError("");
+    try {
+      const [tRes, sRes] = await Promise.all([
+        fetch('/api/bookings/transport', { headers: { 'Authorization': pass } }),
+        fetch('/api/bookings/stay', { headers: { 'Authorization': pass } })
+      ]);
+
+      const tData = await tRes.json();
+      const sData = await sRes.json();
+
+      if (tRes.status === 401 || sRes.status === 401) {
+        setLoginError("Invalid password. Please try again.");
+        localStorage.removeItem("admin_pass");
+        setIsAuthenticated(false);
+      } else {
+        if (tData.success) setTransports(tData.data);
+        if (sData.success) setStays(sData.data);
+        setIsAuthenticated(true);
+        localStorage.setItem("admin_pass", pass);
+      }
+    } catch (err) {
+      setError("Failed to fetch bookings. " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    fetchBookings(passwordInput);
+  };
+
+  if (loading) return <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white", padding: 100, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+    <div className="skeleton" style={{ width: 40, height: 40, borderRadius: "50%", marginBottom: 20 }}></div>
+    Loading Admin...
+  </div>;
+
+  if (!isAuthenticated) return (
+    <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+      <div className="glass-card" style={{ padding: 40, maxWidth: 400, width: "100%", textAlign: "center", animation: "fadeUp 0.6s ease" }}>
+        <div style={{ width: 60, height: 60, borderRadius: 16, background: "var(--primary)", margin: "0 auto 24px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, boxShadow: "0 10px 30px rgba(212, 175, 55, 0.3)" }}>🔒</div>
+        <h1 style={{ fontSize: "1.8rem", fontWeight: 800, marginBottom: 12 }}>Admin Access</h1>
+        <p style={{ color: "#94a3b8", fontSize: 13, marginBottom: 32 }}>Please enter your secret password to view customer bookings.</p>
+        
+        <form onSubmit={handleLogin} style={{ textAlign: "left" }}>
+          <label style={{ display: "block", marginBottom: 8, fontSize: 12, fontWeight: 600, color: "#cbd5e1", textTransform: "uppercase", letterSpacing: 1 }}>Password</label>
+          <input 
+            type="password" 
+            value={passwordInput} 
+            onChange={(e) => setPasswordInput(e.target.value)} 
+            className="input-field"
+            placeholder="Enter your password"
+            style={{ marginBottom: 16 }}
+            required
+          />
+          {loginError && <div style={{ color: "#ef4444", fontSize: 12, marginBottom: 16, textAlign: "center" }}>{loginError}</div>}
+          <button type="submit" className="btn-primary" style={{ width: "100%", padding: "14px", justifyContent: "center" }}>
+            Access Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--dark)", color: "white" }}>

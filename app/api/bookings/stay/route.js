@@ -18,8 +18,15 @@ export async function POST(request) {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
   try {
+    const authHeader = request.headers.get('Authorization');
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!authHeader || authHeader !== adminPassword) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const db = getDB();
     const bookings = db.prepare(`
       SELECT sb.*, s.name as hotel_name, c.name as city_name 
