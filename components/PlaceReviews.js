@@ -6,6 +6,7 @@ export default function PlaceReviews({ placeId }) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   
   // New Review Form
   const [rating, setRating] = useState(5);
@@ -15,20 +16,24 @@ export default function PlaceReviews({ placeId }) {
   const fetchReviews = async () => {
     try {
       const res = await fetch(`/api/reviews?place_id=${placeId}`);
+      if (!res.ok) throw new Error("Failed to fetch reviews");
       const data = await res.json();
       if (data.success) {
-        setReviews(data.data);
+        setReviews(data.data || []);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Review Fetch Error:", err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    setHasMounted(true);
     fetchReviews();
   }, [placeId]);
+
+  if (!hasMounted) return null; // Hydration Guard
 
   const handleSubmit = async (e) => {
     e.preventDefault();

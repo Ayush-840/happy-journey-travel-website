@@ -12,21 +12,58 @@ export default function PlacePage() {
   const [transport, setTransport] = useState([]);
   const [stays, setStays] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("transport");
   const [bookingTarget, setBookingTarget] = useState(null); // { type: 'transport'|'stay', data }
 
-  useEffect(() => {
+  const fetchData = async () => {
     if (!slug) return;
-    fetch(`/api/places/${slug}`).then(r => r.json()).then(d => {
-      setPlace(d.data);
-      setLoading(false);
-      if (d.data?.city_slug) {
-        fetch(`/api/transport?city=${d.data.city_slug}`).then(r => r.json()).then(t => setTransport(t.data || []));
-        fetch(`/api/stays?city=${d.data.city_slug}`).then(r => r.json()).then(s => setStays(s.data || []));
+    setLoading(true);
+    setError(null);
+    try {
+      const pRes = await fetch(`/api/places/${slug}`);
+      if (!pRes.ok) throw new Error("Could not find this destination.");
+      const pData = await pRes.json();
+      setPlace(pData.data);
+
+      if (pData.data?.city_slug) {
+        // Fetch transport and stays in parallel for better performance
+        const [tRes, sRes] = await Promise.all([
+          fetch(`/api/transport?city=${pData.data.city_slug}`),
+          fetch(`/api/stays?city=${pData.data.city_slug}`)
+        ]);
+        
+        const tData = tRes.ok ? await tRes.json() : { data: [] };
+        const sData = sRes.ok ? await sRes.json() : { data: [] };
+
+        setTransport(tData.data || []);
+        setStays(sData.data || []);
       }
-    });
+    } catch (err) {
+      console.error("Fetch Error:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [slug]);
+
+  if (error) return (
+    <div style={{ minHeight: "100vh", background: "var(--dark)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", padding: 20 }}>
+      <div style={{ textAlign: "center", maxWidth: 400 }}>
+        <div style={{ fontSize: 64, marginBottom: 20 }}>🚧</div>
+        <h2 style={{ fontSize: 24, fontWeight: 800, marginBottom: 12 }}>Oops! Something went wrong.</h2>
+        <p style={{ color: "#94a3b8", marginBottom: 30 }}>{error}</p>
+        <button onClick={fetchData} className="btn-primary" style={{ padding: "12px 30px" }}>
+           🔄 Try Again
+        </button>
+      </div>
+    </div>
+  );
 
   if (loading) return (
     <div style={{ minHeight: "100vh", background: "var(--dark)", display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}>
