@@ -59,9 +59,20 @@ export default function Navbar() {
           border: "1px solid var(--glass-border)", display: "flex", flexDirection: "column", gap: 12,
           boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
         }}>
-          {[["🏠 Home", "/"], ["🗺️ Explore", "#states"], ["ℹ️ About", "#about"], ["🔐 Admin", "/admin"]].map(([label, href]) => (
+          {[
+            ["🏠 Home", "/"], 
+            ["🗺️ Explore", "#states"], 
+            ["🏝️ AI Planner", "/planner/generate"],
+            ["📸 Visual Search", "/discover/visual"],
+            ["🤝 Group Hub", "/group/join"],
+            ["📊 Expense Split", "/expenses"],
+            ["🍱 Experiences", "/marketplace"],
+            ["🤳 Social Feed", "/social"],
+            ["ℹ️ About", "#about"], 
+            ["🔐 Admin", "/admin"]
+          ].map(([label, href]) => (
             <Link key={label} href={href} onClick={() => setMenuOpen(false)}
-              style={{ color: "white", textDecoration: "none", fontSize: 15, padding: "8px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              style={{ color: "white", textDecoration: "none", fontSize: 13, padding: "8px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               {label}
             </Link>
           ))}
