@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BookingModal from "@/components/BookingModal";
+import PlaceReviews from "@/components/PlaceReviews";
 
 export default function PlacePage() {
   const { slug } = useParams();
