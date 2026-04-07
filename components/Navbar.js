@@ -32,7 +32,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="desktop-nav">
-          {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner/generate"], ["Social Feed", "/social"], ["Expense Split", "/expenses"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
+          {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner/generate"], ["Social Feed", "/social"], ["Experiences", "/marketplace"], ["Expense Split", "/expenses"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
             <Link key={label} href={href} style={{ color: "#cbd5e1", textDecoration: "none", fontSize: 13, fontWeight: 500, transition: "color 0.2s" }}
               onMouseEnter={e => e.target.style.color = "var(--primary)"}
               onMouseLeave={e => e.target.style.color = "#cbd5e1"}>
