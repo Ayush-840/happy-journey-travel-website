@@ -23,6 +23,8 @@ export async function GET(request) {
     const authHeader = request.headers.get('Authorization');
     const adminPassword = process.env.ADMIN_PASSWORD;
 
+    console.log(`[AuthDebug] Header Length: ${authHeader?.length}, Secret Length: ${adminPassword?.length}`);
+
     if (!authHeader || authHeader !== adminPassword) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
