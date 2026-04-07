@@ -32,8 +32,8 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="desktop-nav">
-          {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner/generate"], ["Visual Search", "/discover/visual"], ["Social Feed", "/social"], ["Experiences", "/marketplace"], ["Expense Split", "/expenses"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
-            <Link key={label} href={href} style={{ color: "#cbd5e1", textDecoration: "none", fontSize: 12, fontWeight: 500, transition: "color 0.2s" }}
+          {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner/generate"], ["Visual Search", "/discover/visual"], ["Group Hub", "/group/join"], ["Social Feed", "/social"], ["Experiences", "/marketplace"], ["Expense Split", "/expenses"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
+            <Link key={label} href={href} style={{ color: "#cbd5e1", textDecoration: "none", fontSize: 11, fontWeight: 500, transition: "color 0.2s" }}
               onMouseEnter={e => e.target.style.color = "var(--primary)"}
               onMouseLeave={e => e.target.style.color = "#cbd5e1"}>
               {label}
