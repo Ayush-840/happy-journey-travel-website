@@ -148,7 +148,7 @@ export default function PlacePage() {
 
             {/* Nearby Attractions */}
             {place.nearby_attractions?.length > 0 && (
-              <div className="glass-card" style={{ padding: 32 }}>
+              <div className="glass-card" style={{ padding: 32, marginBottom: 28 }}>
                 <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 20, color: "white" }}>📌 Nearby Attractions</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {place.nearby_attractions.map(n => (
@@ -166,6 +166,9 @@ export default function PlacePage() {
                 </div>
               </div>
             )}
+
+            {/* Verified Reviews Section */}
+            <PlaceReviews placeId={slug} />
           </div>
 
           {/* RIGHT — Booking Panel */}
