@@ -56,7 +56,7 @@
    ```
 
 5. **Open the app**:
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the result.
+   Navigate to https://happjourneydashboard.netlify.app/ to see the result.
 
 ## 📂 Project Structure
 
