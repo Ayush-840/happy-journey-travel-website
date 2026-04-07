@@ -56,7 +56,23 @@
    ```
 
 5. **Open the app**:
-   Navigate to https://happjourneydashboard.netlify.app/ to see the result.
+   Navigate to [localhost:3000](http://localhost:3000) to see the result.
+
+## 🚀 Deployment
+
+The project is optimized for deployment on both **Netlify** and **Vercel**.
+
+### Prerequisites for Production:
+> [!IMPORTANT]
+> **Set the Admin Password**: To access the `/admin` dashboard in production, you **MUST** set an environment variable named `ADMIN_PASSWORD` in your hosting provider's dashboard (Netlify/Vercel).
+
+#### deployment on Netlify:
+- The project includes a `netlify.toml` file that handles the Next.js build automatically.
+- Ensure the `@netlify/plugin-nextjs` is enabled in your Netlify settings.
+
+#### deployment on Vercel:
+- The project uses Next.js Output File Tracing to bundle the SQLite database with your serverless functions.
+- Simply connect your GitHub repository to Vercel for automatic deployment.
 
 ## 📂 Project Structure
 

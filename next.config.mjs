@@ -3,7 +3,7 @@ const nextConfig = {
   serverExternalPackages: ["better-sqlite3"],
   experimental: {
     outputFileTracingIncludes: {
-      "/**": ["./happy_journey.db"],
+      "/**": ["./happy_journey.db", "./happy_journey.db-wal", "./happy_journey.db-shm"],
     },
   },
   images: {
