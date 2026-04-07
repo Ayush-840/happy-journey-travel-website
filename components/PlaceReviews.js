@@ -139,7 +139,8 @@ export default function PlaceReviews({ placeId }) {
                 </div>
                 
                 <div style={{ color: "var(--primary)", marginBottom: 10, fontSize: 14 }}>
-                   {"★".repeat(r.rating)}{"☆".repeat(5-r.rating)}
+                   {"★".repeat(Math.max(0, Math.min(5, parseInt(r.rating) || 0)))}
+                   {"☆".repeat(Math.max(0, Math.min(5, 5 - (parseInt(r.rating) || 0))))}
                 </div>
 
                 <p style={{ fontSize: 14, color: "#cbd5e1", lineHeight: 1.6, marginBottom: r.image_url ? 15 : 0 }}>
