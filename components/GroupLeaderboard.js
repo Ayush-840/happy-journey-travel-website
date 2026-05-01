@@ -109,7 +109,7 @@ export default function GroupLeaderboard({ tripId, userId }) {
         <aside>
           <div className="glass-card" style={{ padding: 30, position: "sticky", top: 100 }}>
             <h3 style={{ marginBottom: 20, fontWeight: 700 }}>Add a Suggestion</h3>
-            <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 24, lineHeight: 1.6 }}>Seen a place you'll love? Add it to the list for everyone to vote on.</p>
+            <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 24, lineHeight: 1.6 }}>Seen a place you&apos;ll love? Add it to the list for everyone to vote on.</p>
             <form onSubmit={handleAdd}>
                <input 
                  type="text" placeholder="Place Name (e.g. Kyoto Temple)" 

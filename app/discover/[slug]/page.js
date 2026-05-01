@@ -37,8 +37,10 @@ export default function ARDiscoverPage() {
         { enableHighAccuracy: true }
       );
     } else {
-      setError("Geolocation not supported by your browser.");
-      setLoading(false);
+      setTimeout(() => {
+        setError("Geolocation not supported by your browser.");
+        setLoading(false);
+      }, 0);
     }
   }, [slug]);
 

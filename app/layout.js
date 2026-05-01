@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import ChatBot from "@/components/ChatBot";
+import SOSButton from "@/components/SOSButton";
 
 const poppins = Poppins({
   subsets: ["latin"],

@@ -20,7 +20,7 @@ export default function ARMonumentView({ monument }) {
     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1000, background: "black" }}>
       <Script 
         src="https://aframe.io/releases/1.2.0/aframe.min.js" 
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       <Script 
         src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js" 

@@ -32,14 +32,14 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="desktop-nav">
-          {[["Home", "/"], ["Explore", "#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner/generate"], ["Visual Search", "/discover/visual"], ["Group Hub", "/group/join"], ["Social Feed", "/social"], ["Experiences", "/marketplace"], ["Expense Split", "/expenses"], ["About", "#about"], ["Admin", "/admin"]].map(([label, href]) => (
+          {[["Home", "/"], ["Explore", "/#states"], ["Trip Planner", "/planner"], ["AI Planner", "/planner"], ["Visual Search", "/discover/visual"], ["Group Hub", "/group/join"], ["Social Feed", "/social"], ["Experiences", "/marketplace"], ["Expense Split", "/expenses"], ["About", "/#about"], ["Admin", "/admin"]].map(([label, href]) => (
             <Link key={label} href={href} style={{ color: "#cbd5e1", textDecoration: "none", fontSize: 11, fontWeight: 500, transition: "color 0.2s" }}
               onMouseEnter={e => e.target.style.color = "var(--primary)"}
               onMouseLeave={e => e.target.style.color = "#cbd5e1"}>
               {label}
             </Link>
           ))}
-          <Link href="#states" className="btn-primary" style={{ padding: "9px 22px", fontSize: 13 }}>
+          <Link href="/#states" className="btn-primary" style={{ padding: "9px 22px", fontSize: 13 }}>
             ✈️ Plan Trip
           </Link>
         </div>
@@ -62,16 +62,16 @@ export default function Navbar() {
         }}>
           {[
             ["🏠 Home", "/"], 
-            ["🗺️ Explore", "#states"], 
+            ["🗺️ Explore", "/#states"], 
             ["🛡️ Safety Hub", "/safety"],
-            ["🏝️ AI Planner", "/planner/generate"],
+            ["🏝️ AI Planner", "/planner"],
             ["💰 Budget Planner", "/planner/budget"],
             ["📸 Visual Search", "/discover/visual"],
             ["🤝 Group Hub", "/group/join"],
             ["📊 Expense Split", "/expenses"],
             ["🍱 Experiences", "/marketplace"],
             ["🤳 Social Feed", "/social"],
-            ["ℹ️ About", "#about"], 
+            ["ℹ️ About", "/#about"], 
             ["🔐 Admin", "/admin"]
           ].map(([label, href]) => (
             <Link key={label} href={href} onClick={() => setMenuOpen(false)}

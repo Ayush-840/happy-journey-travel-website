@@ -53,7 +53,7 @@ export default function VisualDiscovery() {
               </div>
 
               <div style={{ display: "flex", gap: 16, marginTop: 20 }}>
-                 <Link href={`/planner/generate?destination=${match.location_name}`} className="btn-primary" style={{ textDecoration: "none", flex: 1, justifyContent: "center", fontSize: 15, fontWeight: 700, padding: "15px" }}>
+                 <Link href={`/planner?destination=${match.location_name}`} className="btn-primary" style={{ textDecoration: "none", flex: 1, justifyContent: "center", fontSize: 15, fontWeight: 700, padding: "15px" }}>
                    ✨ Generate My Plan
                  </Link>
                  <button onClick={() => setMatch(null)} className="btn-secondary" style={{ padding: "15px 30px" }}>

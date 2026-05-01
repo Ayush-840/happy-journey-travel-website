@@ -7,9 +7,8 @@ export default function ARView({ monument, historicalOpacity = 0.5 }) {
 
   useEffect(() => {
     // Only running on client
-    if (typeof window !== "undefined") {
-      setLoaded(true);
-    }
+    const timer = setTimeout(() => setLoaded(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   if (!loaded) return <div style={{ color: "white", padding: 20 }}>Initializing AR Scene...</div>;
@@ -19,7 +18,7 @@ export default function ARView({ monument, historicalOpacity = 0.5 }) {
       {/* Load Scripts with Next.js Script component */}
       <Script 
         src="https://aframe.io/releases/1.3.0/aframe.min.js" 
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       <Script 
         src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js" 
