@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from "next/navigation";
 import AILoader from "@/components/AILoader";
@@ -7,7 +7,7 @@ import ItineraryTimeline from "@/components/ItineraryTimeline";
 import BudgetBreakdownCard from "@/components/BudgetBreakdownCard";
 import ExpenseSplitterWidget from "@/components/ExpenseSplitterWidget";
 
-export default function UltimatePlannerDashboard() {
+function PlannerContent() {
   const searchParams = useSearchParams();
   const [prompt, setPrompt] = useState(searchParams.get("destination") || "");
   const [manualData, setManualData] = useState({ state: "", city: "", days: 3, budget: "Medium" });
@@ -22,11 +22,6 @@ export default function UltimatePlannerDashboard() {
     fetch('/api/states').then(r => r.json()).then(data => {
       if (data.success) setStates(data.data);
     });
-
-    // If destination was passed, auto-generate?
-    if (searchParams.get("destination")) {
-       // Optional: trigger generateAI here
-    }
   }, [searchParams]);
 
   const handleStateChange = async (e) => {
@@ -189,5 +184,13 @@ export default function UltimatePlannerDashboard() {
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
+  );
+}
+
+export default function UltimatePlannerDashboard() {
+  return (
+    <Suspense fallback={<AILoader />}>
+      <PlannerContent />
+    </Suspense>
   );
 }
